@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Calculator - Jhalak '26</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Intro Screen */
+    #introScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1.2s ease-out;
+    }
+
+    #mainContent {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+
+    /* Hover Animations */
+    .house-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Hero Section Heights */
+    .hero-height { height: 80vh; }
+
+    /* Mobile Fixes */
+    @media (max-width: 640px) {
+      .hero-height { height: 200px !important; }
+      .hero-text { font-size: 2.5rem !important; }
+      .top-title { font-size: 1.4rem !important; }
+      .calc-card { margin-top: -10px !important; padding: 1.5rem !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Intro Screen -->
+  <div id="introScreen">
+    <h1 class="text-white font-extrabold text-6xl sm:text-7xl md:text-8xl drop-shadow-lg">Jhalak'26</h1>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent">
+
+    <!-- Header -->
+    <header class="w-full bg-white shadow flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-4 gap-3 sm:gap-0">
+      <div class="flex items-center gap-3">
+        <img src="DSA.png" alt="DSA Logo" class="h-12 sm:h-16 object-contain" onerror="this.style.display='none'">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 top-title text-center">Directorate of Student Affairs</h1>
+      </div>
+      <img src="SRM.png" alt="SRM Logo" class="h-12 sm:h-16 object-contain" onerror="this.style.display='none'">
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative w-full hero-height flex items-center justify-center text-white
+            bg-cover bg-center bg-no-repeat"
+            style="background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('flag.jpg');">
+      <h2 class="hero-text text-5xl sm:text-6xl md:text-7xl font-extrabold drop-shadow-lg">JHALAK '26</h2>
+    </section>
+
+    <!-- Houses Display -->
+    <div class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Houses</h2>
+      <div id="housesContainer" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      </div>
+    </div>
+
+    <!-- Calculator Card -->
+    <div class="max-w-2xl mx-auto px-4 pb-12">
+      <div class="bg-white shadow-xl rounded-2xl p-8 calc-card">
+
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">House Calculator</h2>
+        <p class="text-center text-lg text-gray-600 mb-6">Find out which house you belong to</p>
+
+        <div class="mb-6 flex flex-col items-center space-y-3">
+          <label for="programSelect" class="text-lg font-semibold">Choose Program</label>
+          <select id="programSelect" class="text-lg max-w-md w-full px-4 py-2 border rounded-lg">
+            <option value="">-- Select Program --</option>
+            <option value="UG">UG</option>
+            <option value="PG">PG</option>
+          </select>
+        </div>
+
+        <div id="regInputSection" class="hidden mb-6 flex flex-col items-center space-y-3">
+          <label for="regNumber" class="text-lg font-semibold">Enter Last 3 Digits of Registration Number</label>
+          <input id="regNumber" type="number" min="0" max="999" placeholder="e.g., 123"
+            class="text-lg max-w-md w-full text-center px-4 py-2 border rounded-lg">
+          <p id="errorMsg" class="text-red-600 text-sm hidden"></p>
+        </div>
+
+        <div class="flex justify-center">
+          <button id="calculateBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg text-lg">
+            Get Your House
+          </button>
+        </div>
+
+        <div id="resultSection" class="hidden mt-6">
+          <div id="resultCard" class="border-2 rounded-xl p-8 text-center shadow-2xl">
+            <img id="resultLogo" class="w-40 h-40 object-contain mx-auto mb-4" src="" alt="House Logo">
+            <p id="resultName" class="text-5xl font-bold text-primary"></p>
+          </div>
+          <button id="resetBtn" class="mt-4 w-full py-3 border rounded-lg text-lg font-semibold hover:bg-gray-100">
+            Calculate Again
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('introScreen').style.opacity = 0;
+        document.getElementById('mainContent').style.opacity = 1;
+        setTimeout(() => {
+          document.getElementById('introScreen').style.display = 'none';
+        }, 1200);
+      }, 1500);
+    };
+  </script>
+</body>
+</html>
