@@ -137,23 +137,24 @@
 
         /* Houses Logic */
         const houses = {
-            "0": { name: "Trishul", color: "red", logo: "Trishul.png" },
-            "1": { name: "Agni", color: "yellow", logo: "Agni.png" },
-            "2": { name: "Aakash", color: "green", logo: "Aakash.jpg" },
-            "3": { name: "Prithvi", color: "purple", logo: "Prithvi.png" }
+            "0": { name: "Trishul", color: "gray", logo: "Trishul.png" },
+            "1": { name: "Agni", color: "gray", logo: "Agni.png" },
+            "2": { name: "Aakash", color: "gray", logo: "Aakash.jpg" },
+            "3": { name: "Prithvi", color: "gray", logo: "Prithvi.png" }
         };
-        const pgHouse = { name: "Brahmos", color: "yellow", logo: "Brahmos.png" };
+        const pgHouse = { name: "Brahmos", color: "gray", logo: "Brahmos.png" };
 
-        // Hidden departments + UG Engineering & Technology houses in the requested order
+        // Updated departments for all houses
         const allHouses = [
-            { house: "Astra", color: "blue", logo: "Astra.jpg", departments: "Law & FSH" },
-            { house: "Shaurya", color: "red", logo: "Shaurya.png", departments: "Medical Departments" },
-            { house: "Agni", color: "yellow", logo: "Agni.png", departments: "Engineering & Technology" },
-            { house: "Trishul", color: "red", logo: "Trishul.png", departments: "Engineering & Technology" },
-            { house: "Aakash", color: "green", logo: "Aakash.jpg", departments: "Engineering & Technology" },
-            { house: "Brahmos", color: "yellow", logo: "Brahmos.png", departments: "MBA & BBA" },
-            { house: "Nag", color: "green", logo: "Nag.png", departments: "Architecture & Hotel Management" },
-            { house: "Prithvi", color: "purple", logo: "Prithvi.png", departments: "Engineering & Technology" }
+            // --- Engineering & Technology Houses First ---
+            { house: "Agni", color: "gray", logo: "Agni.png", departments: "Engineering and Technology" },
+            { house: "Trishul", color: "gray", logo: "Trishul.png", departments: "Engineering and Technology" },
+            { house: "Aakash", color: "gray", logo: "Aakash.jpg", departments: "Engineering and Technology" },
+            { house: "Prithvi", color: "gray", logo: "Prithvi.png", departments: "Engineering and Technology" },
+            { house: "Astra", color: "gray", logo: "Astra.jpg", departments: "School of Law\nFaculty of Science and Humanities" },
+            { house: "Shaurya", color: "gray", logo: "Shaurya.png", departments: "Medical and Health Sciences" },
+            { house: "Brahmos", color: "gray", logo: "Brahmos.png", departments: "Faculty of Management\nAll PG courses" },
+            { house: "Nag", color: "gray", logo: "Nag.png", departments: "School of Architecture and Interior Design\nInstitute of Hotel Management" }
         ];
 
         const programSelect = document.getElementById("programSelect");
@@ -184,16 +185,9 @@
 
         /* Display Result */
         function displayResult(house) {
-            const colors = {
-                red: "bg-red-100 border-red-400 text-red-800",
-                yellow: "bg-yellow-100 border-yellow-400 text-yellow-800",
-                green: "bg-green-100 border-green-400 text-green-800",
-                purple: "bg-purple-100 border-purple-400 text-purple-800",
-                blue: "bg-blue-100 border-blue-400 text-blue-800"
-            };
-
+            const grayColor = "bg-gray-100 border-gray-400 text-gray-800"; // gray for all
             resultContent.innerHTML = `
-                <div class="p-6 border-2 rounded-lg text-center ${colors[house.color]}">
+                <div class="p-6 border-2 rounded-lg text-center ${grayColor}">
                     <img src="${house.logo}" class="h-20 mx-auto mb-4">
                     <h2 class="text-3xl font-bold">${house.name}</h2>
                 </div>
@@ -215,21 +209,15 @@
             displayResult(calculateHouse(reg));
         });
 
-        /* Render all house cards in a single row */
+        /* Render all house cards in gray */
         allHouses.forEach(h => {
-            const colors = {
-                red: "bg-red-100 border-red-400 text-red-800",
-                yellow: "bg-yellow-100 border-yellow-400 text-yellow-800",
-                green: "bg-green-100 border-green-400 text-green-800",
-                purple: "bg-purple-100 border-purple-400 text-purple-800",
-                blue: "bg-blue-100 border-blue-400 text-blue-800"
-            };
+            const grayColor = "bg-gray-100 border-gray-400 text-gray-800";
             const card = document.createElement("div");
-            card.className = `hidden-house-card p-4 border-2 rounded-lg ${colors[h.color]} flex flex-col items-center w-40`;
+            card.className = `hidden-house-card p-4 border-2 rounded-lg ${grayColor} flex flex-col items-center w-40`;
             card.innerHTML = `
                 <img src="${h.logo}" class="h-16 mb-2">
                 <h3 class="font-bold text-lg text-center">${h.house}</h3>
-                <p class="text-sm text-center mt-1">${h.departments}</p>
+                <p class="text-sm text-center mt-1 whitespace-pre-line">${h.departments}</p>
             `;
             hiddenHousesContainer.appendChild(card);
         });
